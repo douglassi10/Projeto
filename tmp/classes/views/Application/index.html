@@ -1,8 +1,28 @@
-#{extends 'main.html' /}
 #{set title:'TestePBsoft' /}
 
+<html>
+<body>
+<div id="div01"></div>
+<hidden id="01">${te}</hidden>
 
-<h1>${te}</h1>
+<script>
+//let teste = ${te};
+//var teste = ""+&{te};
+//var result = teste.replace(/quot/g, "tu");
+//var str = "";
+//str = str += ${te};
+//var resultado = str.replace(/quot/g, "tu");
+let usu = document.getElementById("01").innerText;
+let contribuidores = JSON.parse(usu);
+var str = "";
+for (contribuidore of contribuidores){
+str = str.concat("<h3>"+contribuidore.login+"  -  "+contribuidore.contributions+" </h3><br>")
+//console.log(usuario.login)
+}
+document.getElementById("div01").innerHTML = str;
+document.getElementById("01").innerText = "";
 
-
+//console.log(${te}) </script>
+</body>
+</html>
 <!--#{welcome /}-->

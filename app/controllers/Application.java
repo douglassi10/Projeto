@@ -18,7 +18,7 @@ public class Application extends Controller {
 	static JSONArray arrayJson = null;
     public static void index() {
          try {
-             String url = "https://api.github.com/users";
+             String url = "https://api.github.com/repos/microsoft/healthvault-ios-sdk/contributors";
              URL objeto = new URL(url);
              HttpURLConnection conectar = (HttpURLConnection) objeto.openConnection();
              BufferedReader entrada = new BufferedReader(
@@ -53,11 +53,12 @@ public class Application extends Controller {
              //String teste = respostaString.toString();
              //System.out.println(percorre());
 
-             
-         }catch(Exception e){
+             String te =respostaString.toString();
 
+         }catch(Exception e){
+             System.out.println();
          }
-         String te = test.toString();
+         String te = arrayJson.toString();
          //System.out.println(teste);
          render(te);
          
