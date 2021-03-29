@@ -2,27 +2,20 @@
 
 <html>
 <body>
-<div id="div01"></div>
-<hidden id="01">${te}</hidden>
+<div id="div01">${te}</div>
+<div id="div02"></div>
 
 <script>
-//let teste = ${te};
-//var teste = ""+&{te};
-//var result = teste.replace(/quot/g, "tu");
-//var str = "";
-//str = str += ${te};
-//var resultado = str.replace(/quot/g, "tu");
-let usu = document.getElementById("01").innerText;
+
+let usu = document.getElementById("div01").innerText;
 let contribuidores = JSON.parse(usu);
 var str = "";
 for (contribuidore of contribuidores){
-str = str.concat("<h3>"+contribuidore.login+"  -  "+contribuidore.contributions+" </h3><br>")
-//console.log(usuario.login)
+str = str.concat("<h3>"+contribuidore.name+"  -  "+contribuidore.contributions+" </h3><br>")
 }
-document.getElementById("div01").innerHTML = str;
-document.getElementById("01").innerText = "";
-
-//console.log(${te}) </script>
+document.getElementById("div02").innerHTML = str;
+//document.getElementById("01").innerText = "";
+</script>
 </body>
 </html>
 <!--#{welcome /}-->

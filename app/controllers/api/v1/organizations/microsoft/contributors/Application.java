@@ -1,22 +1,25 @@
-package controllers;
+package controllers.api.v1.organizations.microsoft.contributors;
 
 import play.*;
 import play.mvc.*;
 
-
+import java.awt.List;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-
 import org.json.*;
+
 
 public class Application extends Controller {
     static StringBuffer test = new StringBuffer();
 	static String teste = "";
     static String logins;
+    static int contributions;
+    static JSONArray arrayJsonContribuidores = new JSONArray();
 	static JSONArray arrayJson = null;
-    public static void index() {
+    
+	public static void index() {
          try {
              String url = "https://api.github.com/repos/microsoft/healthvault-ios-sdk/contributors";
              URL objeto = new URL(url);
@@ -30,39 +33,38 @@ public class Application extends Controller {
                  respostaString.append(linhaentrada);
              }
              entrada.close();
-             //String volt = respostaString.toString();
-             // System.out.println(respostaString.toString());
-              arrayJson = new JSONArray(respostaString.toString());
-             //int number = arrayJson.getJSONObject(1).getInt("id");
-
-             //Integer soma =  arrayJson.getJSONObject(1).getInt("id") + arrayJson.getJSONObject(0).getInt("id");
-
+         
+             arrayJson = new JSONArray(respostaString.toString());
+ 
              int index = 0;
              JSONObject posicao = new JSONObject();
+
              while (posicao != null) {
                  logins = arrayJson.getJSONObject(index).getString("login");
-                 test.append(logins+"\n");
-                 //teste += " "+logins+"\n";
-                 //System.out.print(test);
+                 contributions = arrayJson.getJSONObject(index).getInt("contributions");
+                 
+                 JSONObject contrib = new JSONObject();
+                 
+                 contrib.put("contributions", contributions);
+                 contrib.put("name", logins);
+                 arrayJsonContribuidores.put(contrib);
+                 contrib = null;
+                 System.out.println(contrib);
+
                  index++;
                  posicao = arrayJson.getJSONObject(index);
                  
              }
-             //String teste = logins;
-             //int teste = arrayJson.getJSONObject(1).getInt("id");
-             //String teste = respostaString.toString();
-             //System.out.println(percorre());
 
-             String te =respostaString.toString();
-
+           
          }catch(Exception e){
-             System.out.println();
+             //System.out.println("ocorreu um erro!");
          }
-         String te = arrayJson.toString();
-         //System.out.println(teste);
+
+         JSONArray te = arrayJsonContribuidores;
+         System.out.println(arrayJsonContribuidores);
          render(te);
-         
+ 
     }
-    
-   
+ 
 }
