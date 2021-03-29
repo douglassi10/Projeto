@@ -1,4 +1,4 @@
-package controllers.api.v1.organizations.microsoft.contributors;
+package controllers;
 
 import play.*;
 import play.mvc.*;
@@ -12,8 +12,6 @@ import org.json.*;
 
 
 public class Application extends Controller {
-    static StringBuffer test = new StringBuffer();
-	static String teste = "";
     static String logins;
     static int contributions;
     static JSONArray arrayJsonContribuidores = new JSONArray();
@@ -35,10 +33,9 @@ public class Application extends Controller {
              entrada.close();
          
              arrayJson = new JSONArray(respostaString.toString());
- 
+             
              int index = 0;
              JSONObject posicao = new JSONObject();
-
              while (posicao != null) {
                  logins = arrayJson.getJSONObject(index).getString("login");
                  contributions = arrayJson.getJSONObject(index).getInt("contributions");
@@ -48,22 +45,17 @@ public class Application extends Controller {
                  contrib.put("contributions", contributions);
                  contrib.put("name", logins);
                  arrayJsonContribuidores.put(contrib);
-                 contrib = null;
                  System.out.println(contrib);
-
                  index++;
                  posicao = arrayJson.getJSONObject(index);
-                 
              }
-
-           
+                    
          }catch(Exception e){
              //System.out.println("ocorreu um erro!");
          }
-
-         JSONArray te = arrayJsonContribuidores;
+         JSONArray contribuidores = arrayJsonContribuidores;
          System.out.println(arrayJsonContribuidores);
-         render(te);
+         render(contribuidores);
  
     }
  
